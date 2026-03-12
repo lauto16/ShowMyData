@@ -28,7 +28,7 @@ class FileManager(ABC):
             relative_path = file_path.relative_to(base_dir).as_posix()
 
             if relative_path not in current_files_path:
-                new_file = RegularFile(relative_path)
+                new_file = RegularFile(relative_path, BASE_DATA_DIR)
 
                 print(new_file.asDict())
                 data["files"].append(new_file.asDict())

@@ -2,11 +2,13 @@
     "files": [
         {
             "path": "file.txt",
-            "hash": "aadf327c8267c09d6fffd87a1a80ad3c798469ff332b7a57b9e8c045d46b2af7"
+            "hash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+            "type": "text"
         },
         {
             "path": "file2.txt",
-            "hash": "04e2f59431a9d219321baf7d21b8cc797d7615dc3e9515c782c49d2075658701"
+            "hash": "60303ae22b998861bce3b28f33eec1be758a213c86c93c076dbe9f558c11c752",
+            "type": "text"
         }
     ]
 }
