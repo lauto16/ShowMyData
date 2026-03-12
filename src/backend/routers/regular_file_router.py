@@ -17,4 +17,3 @@ def get_files_json() -> JSONResponse:
     with open(FILES_JSON_PATH, "r") as json_file:
         data = json.load(json_file)
     return JSONResponse(data)
- 

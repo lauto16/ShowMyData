@@ -7,8 +7,7 @@ class RegularFile:
     """
     Represents a regular file in the user's PC.
     """
-    
-    
+
     def __init__(self, file_path: str, base_path: str) -> None:
         self.file_path = file_path
         self.base_path = base_path
@@ -16,11 +15,7 @@ class RegularFile:
         self.type = self.getType(file_path)
 
     def asDict(self) -> dict:
-        return {
-            "path": self.file_path,
-            "hash": self.hash,
-            "type": self.type
-        }
+        return {"path": self.file_path, "hash": self.hash, "type": self.type}
 
     @staticmethod
     def getType(file_path: str) -> str:

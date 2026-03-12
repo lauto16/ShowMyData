@@ -4,6 +4,7 @@ from pathlib import Path
 from abc import ABC
 import json
 
+
 class FileManager(ABC):
 
     @staticmethod
@@ -17,7 +18,7 @@ class FileManager(ABC):
         Returns:
             dict: modified data dict with new files
         """
-        
+
         current_files_path = {file["path"] for file in data["files"]}
 
         for file_path in base_dir.iterdir():
@@ -32,7 +33,7 @@ class FileManager(ABC):
 
                 print(new_file.asDict())
                 data["files"].append(new_file.asDict())
-                
+
         return data
 
     @staticmethod
@@ -43,7 +44,7 @@ class FileManager(ABC):
 
         with open(FILES_JSON_PATH, "r") as json_file:
             data = json.load(json_file)
-            
+
         data = FileManager.scanForFiles(data, BASE_DATA_DIR)
 
         with open(FILES_JSON_PATH, "w") as json_file:
