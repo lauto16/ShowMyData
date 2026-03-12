@@ -22,10 +22,10 @@ class FileManager(ABC):
         current_files_path = {file["path"] for file in data["files"]}
 
         for file_path in base_dir.iterdir():
-            
+
             if not file_path.is_file():
                 continue
-            
+
             if file_path.name.startswith("."):
                 continue
 
