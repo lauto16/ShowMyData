@@ -13,6 +13,7 @@ def refresh_data_folder(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         FileManager.addNewFiles()
+        FileManager.deleteOldFiles()
         return func(*args, **kwargs)
 
     return wrapper

@@ -1,12 +1,11 @@
 from .consts import FILES_JSON_PATH, BASE_DATA_DIR
 from helpers.regular_file import RegularFile
 from pathlib import Path
-from abc import ABC
 import json
 
 
-class FileManager(ABC):
-
+class FileManager():
+    
     @staticmethod
     def scanForFiles(data: dict, base_dir: Path) -> dict:
         """
@@ -38,7 +37,32 @@ class FileManager(ABC):
                 data["files"].append(new_file.asDict())
 
         return data
+    
+    @staticmethod
+    def deleteOldFiles() -> None:
+        """
+        Removes files from FILES_JSON_PATH that no longer exist in BASE_DATA_DIR
+        """
 
+        with open(FILES_JSON_PATH, "r") as json_file:
+            data = json.load(json_file)
+
+        valid_files = []
+
+        for file in data["files"]:
+            file_path = Path(BASE_DATA_DIR) / file["path"]
+
+            if file_path.is_file():
+                valid_files.append(file)
+            else:
+                print(f"Removing missing file from JSON: {file['path']}")
+
+        data["files"] = valid_files
+
+        with open(FILES_JSON_PATH, "w") as json_file:
+            json.dump(data, json_file, indent=4)
+        
+        
     @staticmethod
     def addNewFiles() -> None:
         """
@@ -49,6 +73,6 @@ class FileManager(ABC):
             data = json.load(json_file)
 
         data = FileManager.scanForFiles(data, BASE_DATA_DIR)
-
+        
         with open(FILES_JSON_PATH, "w") as json_file:
             json.dump(data, json_file, indent=4)
