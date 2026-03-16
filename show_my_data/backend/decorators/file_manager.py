@@ -1,6 +1,6 @@
 from helpers.file_manager import FileManager
 from functools import wraps
-
+from helpers.consts import FILES_JSON_PATH
 
 def refresh_data_folder(func):
     """

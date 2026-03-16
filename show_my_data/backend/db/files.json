@@ -1,13 +1,8 @@
 {
     "files": [
         {
-            "path": "file.txt",
-            "hash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
-            "type": "text"
-        },
-        {
-            "path": "file2.txt",
-            "hash": "60303ae22b998861bce3b28f33eec1be758a213c86c93c076dbe9f558c11c752",
+            "path": "test.txt",
+            "hash": "943c3c7d82bad5983ba15fa3a819343640cbf5b1e17b0ec65ec35286a26d5b8d",
             "type": "text"
         }
     ]

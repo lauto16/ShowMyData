@@ -38,3 +38,7 @@ EXT_TYPE_MAP = {
     "database": {"db", "sqlite", "sqlite3", "sql", "mdb"},
     "config": {"ini", "cfg", "conf", "env", "toml"},
 }
+
+
+if __name__ == "__main__":
+    print(FILES_JSON_PATH)
