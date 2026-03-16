@@ -1,7 +1,7 @@
 from helpers.consts import EXT_TYPE_MAP
 from pathlib import Path
 import hashlib
-
+import uuid
 
 class RegularFile:
     """
@@ -29,11 +29,16 @@ class RegularFile:
         return "other"
 
     @staticmethod
-    def generateHash(file_path: str, base_path: str) -> str:
+    def generateHash(file_path: str, base_path: Path) -> str:
         hasher = hashlib.sha256()
 
-        with open(base_path / file_path, "rb") as f:
+        full_path = base_path / file_path
+
+        with open(full_path, "rb") as f:
             while chunk := f.read(8192):
                 hasher.update(chunk)
 
-        return hasher.hexdigest()
+        content_hash = hasher.hexdigest()
+        unique_part = uuid.uuid4().hex
+
+        return f"{content_hash}_{unique_part}"
