@@ -1,16 +1,6 @@
 {
     "files": [
         {
-            "path": "file1.txt",
-            "hash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08_897e94111f0849db956011b7d7e96058",
-            "type": "text"
-        },
-        {
-            "path": "file2.txt",
-            "hash": "60303ae22b998861bce3b28f33eec1be758a213c86c93c076dbe9f558c11c752_acdd2076233c4c55ad51ef176026ac2d",
-            "type": "text"
-        },
-        {
             "path": "sample_archive.7z",
             "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855_d5e7d456761141e9a4f7524ba2c20653",
             "type": "archive"
@@ -464,6 +454,16 @@
             "path": "sample_web.yml",
             "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855_7da85bfef23d4d279a3efea5d8a1b38c",
             "type": "web"
+        },
+        {
+            "path": "LauncherFenix-Minecraft-v7.jar",
+            "hash": "e7b3db67c5b22fb6175be7299d1ad622d6183210d212ca3ce464292b627400f1_3bfb1eecdc3c47ae9f457138780bd793",
+            "type": "other"
+        },
+        {
+            "path": "iniciar_todo.bat",
+            "hash": "bb8b71237811ee4b492043d5f5e7cf45fc1480b3a165f41a514fbd890495ef50_5f38b36783f440b2a3ccd56e59605621",
+            "type": "other"
         }
     ]
 }
