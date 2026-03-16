@@ -1,10 +1,11 @@
-from decorators.file_manager import refresh_data_folder
-from helpers.consts import FILES_JSON_PATH, BASE_DATA_DIR
-from fastapi.responses import JSONResponse
 from fastapi import APIRouter, UploadFile, File, HTTPException
+from helpers.consts import FILES_JSON_PATH, BASE_DATA_DIR
+from decorators.file_manager import refresh_data_folder
+from fastapi.responses import JSONResponse
 from pathlib import Path
-import json
 import shutil
+import json
+
 
 regular_file_router = APIRouter()
 

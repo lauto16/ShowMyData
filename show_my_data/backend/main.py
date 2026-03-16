@@ -1,5 +1,6 @@
 from routers.regular_file_router import regular_file_router
 from fastapi.middleware.cors import CORSMiddleware
+from routers.auth_router import auth_router
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -19,3 +20,4 @@ app.add_middleware(
 )
 
 app.include_router(regular_file_router)
+app.include_router(auth_router)

@@ -3,6 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const API = "http://localhost:5000";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   FaFileAlt,
   FaFileCode,
@@ -76,11 +79,31 @@ function App() {
     }
   }, [authenticated]);
 
-  const handleLogin = () => {
-    if (password.length >= 1) {
+  const handleLogin = async () => {
+    if (!password) {
+      toast.error("Ingrese contraseña");
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ password })
+      });
+
+      if (!res.ok) {
+        toast.error("Contraseña incorrecta");
+        return;
+      }
+
       setAuthenticated(true);
-    } else {
-      alert("Ingrese contraseña");
+
+    } catch (err) {
+      console.error(err);
+      toast.error("Error de conexión");
     }
   };
 
@@ -151,7 +174,9 @@ function App() {
 
     return (
 
+
       <div className="container vh-100 d-flex justify-content-center align-items-center">
+        <ToastContainer />
 
         <div className="card p-4 shadow" style={{ width: "350px" }}>
 
@@ -180,86 +205,86 @@ function App() {
 
   return (
 
-    <div className="container mt-4">
+      <div className="container mt-4">
+      <ToastContainer />
 
-      <h1 className="text-center mb-4">ShowMyData</h1>
+        <h1 className="text-center mb-4">ShowMyData</h1>
 
-      <div className="row mb-3">
+        <div className="row mb-3">
 
-        <div className="col-md-4">
-          <input
-            type="file"
-            className="form-control"
-            onChange={handleUpload}
-          />
+          <div className="col-md-4">
+            <input
+              type="file"
+              className="form-control"
+              onChange={handleUpload}
+            />
+          </div>
+
+          <div className="col-md-4">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Buscar archivo..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+
+          <div className="col-md-4">
+            <button
+              className="btn btn-danger w-100"
+              onClick={deleteSelected}
+            >
+              Borrar seleccionados
+            </button>
+          </div>
+
         </div>
 
-        <div className="col-md-4">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Buscar archivo..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
+        <div className="card shadow">
 
-        <div className="col-md-4">
-          <button
-            className="btn btn-danger w-100"
-            onClick={deleteSelected}
-          >
-            Borrar seleccionados
-          </button>
-        </div>
+          <div className="card-body">
 
-      </div>
+            <table className="table table-hover">
 
-      <div className="card shadow">
-
-        <div className="card-body">
-
-          <table className="table table-hover">
-
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-                <th>Archivo</th>
-                <th>Tipo</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {filteredFiles.map((file) => (
-                <tr key={file.hash}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      checked={selectedFiles.has(file.path)}
-                      onChange={() => toggleSelect(file.path)}
-                    />
-                  </td>
-
-                  <td style={{ fontSize: "1.2rem" }}>
-                    {getFileIcon(file.type)}
-                  </td>
-
-                  <td>{file.path}</td>
-                  <td>{TYPES_SP[file.type]}</td>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th>Archivo</th>
+                  <th>Tipo</th>
                 </tr>
-              ))}
+              </thead>
 
-            </tbody>
+              <tbody>
+                {filteredFiles.map((file) => (
+                  <tr key={file.hash}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedFiles.has(file.path)}
+                        onChange={() => toggleSelect(file.path)}
+                      />
+                    </td>
 
-          </table>
+                    <td style={{ fontSize: "1.2rem" }}>
+                      {getFileIcon(file.type)}
+                    </td>
+
+                    <td>{file.path}</td>
+                    <td>{TYPES_SP[file.type]}</td>
+                  </tr>
+                ))}
+
+              </tbody>
+
+            </table>
+
+          </div>
 
         </div>
 
       </div>
-
-    </div>
-
   );
 }
 
