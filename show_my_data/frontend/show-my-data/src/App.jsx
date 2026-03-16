@@ -3,6 +3,54 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 const API = "http://localhost:5000";
 
+import {
+  FaFileAlt,
+  FaFileCode,
+  FaGlobe,
+  FaFileImage,
+  FaFileVideo,
+  FaFileAudio,
+  FaFilePdf,
+  FaFileArchive,
+  FaCog,
+  FaDatabase,
+  FaCogs,
+} from "react-icons/fa";
+
+const TYPE_ICON_MAP = {
+  text: <FaFileAlt color="#6c757d" />,
+  code: <FaFileCode color="#0d6efd" />,
+  web: <FaGlobe color="#20c997" />,
+  image: <FaFileImage color="#198754" />,
+  video: <FaFileVideo color="#dc3545" />,
+  audio: <FaFileAudio color="#fd7e14" />,
+  document: <FaFilePdf color="#dc3545" />,
+  archive: <FaFileArchive color="#6f42c1" />,
+  executable: <FaCogs color="#212529" />,
+  database: <FaDatabase color="#0dcaf0" />,
+  config: <FaCog color="#adb5bd" />,
+  default: <FaFileAlt />,
+};
+
+const TYPES_SP = {
+  "text": "Texto",
+  "code": "Código",
+  "web": "Web",
+  "image": "Imagen",
+  "video": "Video",
+  "audio": "Audio",
+  "document": "Documento",
+  "archive": "Archivo",
+  "executable": "Ejecutable",
+  "database": "Base de datos",
+  "config": "Configuracion",
+  "default": "Default"
+}
+
+const getFileIcon = (type) => {
+  return TYPE_ICON_MAP[type] || TYPE_ICON_MAP.default;
+};
+
 function App() {
 
   const [authenticated, setAuthenticated] = useState(false);
@@ -176,17 +224,15 @@ function App() {
             <thead>
               <tr>
                 <th></th>
+                <th></th>
                 <th>Archivo</th>
                 <th>Tipo</th>
               </tr>
             </thead>
 
             <tbody>
-
               {filteredFiles.map((file) => (
-
                 <tr key={file.hash}>
-
                   <td>
                     <input
                       type="checkbox"
@@ -195,21 +241,14 @@ function App() {
                     />
                   </td>
 
-                  <td>{file.path}</td>
-
-                  <td>{file.type}</td>
-
-                </tr>
-
-              ))}
-
-              {filteredFiles.length === 0 && (
-                <tr>
-                  <td colSpan="3" className="text-center">
-                    No hay archivos
+                  <td style={{ fontSize: "1.2rem" }}>
+                    {getFileIcon(file.type)}
                   </td>
+
+                  <td>{file.path}</td>
+                  <td>{TYPES_SP[file.type]}</td>
                 </tr>
-              )}
+              ))}
 
             </tbody>
 
